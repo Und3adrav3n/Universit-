@@ -1,0 +1,61 @@
+
+_EXIT = 1
+_PRINTF = 127
+
+.SECT .TEXT
+
+MAIN:
+	MOV	BP,SP
+	PUSH	A
+	PUSH	4
+	CALL	MAX
+	PUSH	V	
+	CALL	CREA
+	PUSH	DX
+	PUSH	string
+	PUSH	_PRINTF
+	SYS
+	MOV	SP,BP
+	PUSH	0
+	PUSH	_EXIT
+	SYS
+
+MAX:
+	PUSH 	BP
+	MOV	BP,SP
+	MOV	CX,4(BP)
+	MOV	SI,6(BP)
+	MOV	DX,(A)
+1:	LODS	
+	CMP	DX,AX
+	JS	2f
+	LOOP	1b
+	JCXZ	3f
+2:	MOV	DX,AX
+	LOOP	1b
+3:	POP	BP
+	RET
+
+CREA:
+	PUSH	BP
+	MOV	BP,SP
+	MOV	DI,4(BP)
+	MOV	CX,6(BP)
+	MOV	SI,8(BP)
+1:	LODS
+	MOV	(DI),AX
+	ADD	DI,2
+	LOOP	1b
+	POP	BP
+	RET
+
+.SECT .DATA
+
+A: .WORD 1
+B: .WORD 2
+C: .WORD 4
+D: .WORD 3
+string: .ASCIZ "Il massimo e' %d\n"
+V: .WORD 0,0,0,0
+
+.SECT .BSS

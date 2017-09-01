@@ -1,0 +1,27 @@
+.SECT .TEXT !1
+start: !2
+MOV CX,frm-vec !3
+SHR CX,1 !4
+MOV BX,vec !5
+MOV SI,0 !6
+MOV AX,(BX)(SI) !7
+DEC CX !8
+1: CMP AX,2(BX)(SI) !9
+JG 2f !10
+ADD SI,2 !11
+MOV AX,(BX)(SI) !12
+LOOP 1b !13
+MOV AX,1 !14
+JMP 3f !15
+2: MOV AX,0 !16
+3: PUSH AX !17
+PUSH frm !18
+PUSH 127 !19
+SYS !20
+MOV SP,BP !21
+PUSH 0 !22
+PUSH 1 !23
+SYS !24
+.SECT .DATA !25
+vec: .WORD 3,4,7,6,15 !26
+frm: .ASCII "%d" !27 

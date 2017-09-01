@@ -1,0 +1,113 @@
+--------------
+PSEUDOCODIFICA
+--------------
+
+CONNESSE-UGUALI(A)
+	
+	for i=0 to A.length-1
+		color[i]=0
+
+	j=0
+	for i=0 to A.length-1
+		if(color[i]==0)
+			j=j+1
+			DFS-VISIT(A,i,color,j)
+	
+	n_nodi=CONTANODI(A,1,color)
+	b=true	
+	for i=2 to j
+		if n_nodi != CONTANODI(A,i,color)
+			b=false
+	return b
+
+DFS-VISIT(A,i,color,j)
+
+	color[i]=j
+	x=A[i]
+	while x!=null
+		v=x.key
+		if color[v]==0
+			DFS-VISIT(A,v,color,j)
+		x=x.next
+
+CONTANODI(A,j,color)
+
+	cont=0
+	for i=0 to A.length-1
+		if color[i]==j
+			cont=cont+1
+	return cont
+
+Complessità pari a Teta(n)
+
+Nel caso peggiore rappresentato da un albero completo,
+abbiamo che AGGIUNGI-IN-CODA ha complessità Teta(15) 
+dato che non potranno esserci più di 15 nodi in quel
+punto del programma (altezza == 3) da cui Teta(1).
+Tolto questo, l'unica parte della funzione ricorsiva a
+dare una complessità è la visita, che porta il tutto a 
+Teta(n).
+
+
+----------------
+PROGRAMMAZIONE C
+----------------
+
+LINGUAGGIO C
+
+typedef struct elem { 
+	int data;      
+	struct elem* sx;      
+	struct elem* dx;      
+} nodo_albero; 
+typedef nodo_albero* BTree; 
+
+typedef struct elem2 { 
+	int data;
+	struct elem2* primofiglio;      
+	struct elem2* fratello;      
+} nodo_alberoN;        
+typedef nodo_alberoN* BNTree; 
+
+int distanza(Btree T, int x);
+
+---1
+int livello_min(Btree T){
+	if(t==NULL)
+		return -1;
+	if(T->left==NULL)
+		return T->info;
+	return livello_min(T->sx);
+}
+
+---2
+int diff_livello(Btree T, int x){
+	
+	int profondità = livello(T,x);
+	int differenza = somma_livello(T,profondità);
+	return profondità == differenza;
+}
+
+int somma_livello(Btree T, int h){
+	if(T==NULL)
+		return 0;
+	if(h==0)
+		return T->info;
+	return somma_livello(T->sx,h-1)+somma_livello(T->dx,h-1);
+}
+
+---3
+int conta_occorrenze(BNTree T, int x, int n){
+	if(T==NULL)
+		return 0;
+
+	int nfigli=0, k=0;
+	BNTree temp = T->primofiglio;
+	while(temp!=NULL){
+		if(temp->info==x)
+			nfigli++;
+		k+=conta_occorrenze(temp,x,n);
+		temp=temp->fratello;
+	}
+	return k+(nfigli>1 && nfigli<n);
+}

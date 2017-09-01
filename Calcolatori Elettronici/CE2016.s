@@ -1,0 +1,56 @@
+_EXIT = 1
+_PRINTF = 127
+.SECT .TEXT
+main: 			!4
+	MOV 	BP,SP
+	PUSH	W
+	PUSH	V
+	MOV	CX,W-V
+	SHR	CX,1
+	PUSH	CX	!10
+	CALL	COPY
+	CALL	CHECK
+	PUSH	BX
+	PUSH	string
+	PUSH	_PRINTF
+	SYS
+	MOV	SP,BP
+	PUSH	0
+	PUSH	_EXIT
+	SYS		!20
+
+COPY:
+	PUSH	BP
+	MOV	BP,SP
+	MOV	CX,4(BP)
+	MOV	SI,6(BP)
+	MOV	DI,8(BP)
+1:	LODS
+	MOV	(DI),AX
+	ADD	DI,2	!30
+	LOOP	1b
+	POP	BP
+	RET
+
+CHECK:
+	PUSH	BP
+	MOV	BP,SP
+	MOV	CX,4(BP)
+	MOV	SI,6(BP)
+	MOV	DI,8(BP)	!40
+	MOV	BX,1
+1:	LODS
+	CMP	AX,(DI)
+	JNE	2f
+	ADD	DI,2
+	LOOP	1b
+	JCXZ	3f
+2:	MOV	BX,0
+3:	POP	BP
+	RET
+				!50
+.SECT .DATA
+	V:	.WORD	1,2,3,4,5
+	W:	.WORD	0,0,0,0,0
+	string:	.ASCIZ	"Copia andata a buon fine: %d\n"
+.SECT .BSS
