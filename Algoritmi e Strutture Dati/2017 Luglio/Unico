@@ -83,7 +83,7 @@ int livello_min(Btree T){
 ---2
 int diff_livello(Btree T, int x){
 	
-	int profondità = livello(T,x);
+	int profondità = distanza(T,x);
 	int differenza = somma_livello(T,profondità)-x;
 	return profondità == differenza;
 }
