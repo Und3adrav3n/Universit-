@@ -52,7 +52,12 @@ public class Simulatore {
 			this.formiche.add(creaEsploratrice());
 			this.formiche.add(creaInseguitrice());
 			this.formiche.add(creaAggressiva());
+			this.formiche.add(creaFurba());
 		}
+	}
+	
+	private Formica creaFurba() {
+		return new Furba(this.getAmbiente());
 	}
 	
 	private Formica creaAggressiva() {
