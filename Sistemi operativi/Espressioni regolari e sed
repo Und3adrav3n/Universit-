@@ -1,0 +1,27 @@
+grep
+	'^'	inizio riga
+	'$'	fine riga
+	'\<'	inizio parola
+	'\>'	fine parola
+	'a'	carattere
+	'ab'	sequenza di caratteri
+	'.'	un carattere qualsiasi
+	'a*'	un carattere ripetuto da 0 a n volte
+	'[ab]'	lista di caratteri da cercare
+	'[^ab]'	lista di caratteri da evitare
+grep -E
+	'a?'	un carattere ripetuto 0 o 1 volta
+	'a+'	un carattere ripetuto da 1 a n volte
+	'a|b'	a or b, quivalente a [ab]	
+	
+	
+sed
+	-n
+    #d			cancella la #esima riga del file
+	'/pattern/p'		stampa il pattern specificato
+	'/pattern/d'		cancella le righe che includono il pattern specificato
+	'#,/pattern/d'		cancella dalla #esima riga del file fino al presentarsi del pattern
+	's/pattern1/pattern2/'	sostituisce pattern1 con pattern2
+	'pattern/s/p1/p2/'	in tutte le righe che includono il pattern, sostituisce p1 con p2
+	'pattern/y/p1/p2/'	in tutte le righe che includono il pattern, 
+	'operazione/g'		svolge l'operazione per tutte le occorrenze nel file

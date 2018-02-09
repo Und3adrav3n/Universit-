@@ -1,0 +1,7 @@
+{
+	print
+}
+
+/crine/ {
+	exit
+}

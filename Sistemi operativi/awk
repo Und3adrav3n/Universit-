@@ -1,0 +1,24 @@
+Variabili:	
+	NR  = Numero attuale di Record (riga)
+	RS  = Carattere utilizzato per dividere i record
+	ORS = Carattere utilizzato per dividere i record in output
+	NF  = Numero totale di Fields (parole) nel record attuale
+	FS  = Carattere utilizzato per dividere i fields
+	OFS = Carattere utilizzato per dividere i fields in output
+	FILENAME = nome del file su cui si sta operando
+
+	
+pattern { azione }
+	pattern = specifica quando fare l'azione
+		BEGIN    = prima di leggere il file
+		END      = dopo aver letto tutto il file
+		/string/ = stringa che rappresenta una sequenza di caratteri per cui attivare l'azione (valgono tutte le regole delle regex già viste)
+		(cond)   = cond che rappresenta la condizione che deve verificarsi per attivare l'azione
+			 = nel caso di pattern vuoto, l'azione viene eseguita per ogni record dell'input 
+	azione  = specifica cosa fare una volta trovato il rispettivo pattern
+		istr condizionali if(cond)
+				  else
+		istr ripetitive for(init; cond; iter)
+				for var in array
+				while(cond)
+				

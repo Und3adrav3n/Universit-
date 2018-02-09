@@ -1,0 +1,26 @@
+grep a esempio.txt
+grep . esempio.txt
+grep '[abcd]' esempio.txt
+grep '[^abcd]' esempio.txt
+grep '[a-g]' esempio.txt
+grep [[:upper:]] esempio.txt
+grep 'ad' esempio.txt
+grep 'a[1-5]' esempio.txt
+grep 'stringa$' esempio.txt
+grep '^stringa' esempio.txt
+grep '^stringa$' esempio.txt
+grep '\<stringa' esempio.txt
+grep 'stringa\>' esempio.txt
+grep 'ab*c' esempio.txt
+grep '[\.*]' esempio.txt
+grep '[a^b]' esempio.txt
+grep -E 'ab?c' esempio.txt
+grep -E 'ab+c' esempio.txt
+grep -E 'ab{2}c' esempio.txt
+grep -E 'ab{2,3}c' esempio.txt
+grep -E '\<[[:digit:]]{4,}\>' esempio.txt
+grep -E 'a|b' esempio.txt
+grep -E 'a|bc+' esempio.txt
+grep -E 'a|(bc)+' esempio.txt
+grep -E (a|b)c+' esempio.txt
+grep '\<a.*[^02468]\>' esempio.txt

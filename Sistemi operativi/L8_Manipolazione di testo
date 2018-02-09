@@ -1,0 +1,10 @@
+sed 8d /etc/passwd			# cancella l'ottava riga
+set '/^$/d' /etc/passwd			# cancella tutte le righe vuote
+sed '1,/^$/d' /etc/passwd		# cancella dall'inizio dell'input fino alla prima riga vuota compresa
+sed -n /Jones/p /etc/passwd		# visualizza solo le righe ove è presente Jones
+sed 's/Windows/Linux'			# sostituiscce la prima occorrenza di Windows con Linux
+sed 's/BSOD/stabilità/g' /etc/passwd	# sostiuisce tutte le occorrenze di BSOD con stabilità
+sed 's/ *$//' /etc/passwd		# cancella tutti gli spazi che si trovano alla fine di ogni riga
+sed '/GUI/d' /etc/passwd		# cancella tutte le righe in cui è presente GUI
+sed 's/abc/def/g' /etc/passwd		# sostituisce tutte le occorrene di abc con def
+sed 's/^[ \t]*//' /etc/passwd		# rimuovi ogni spazio o riga all'inizio di ogni riga

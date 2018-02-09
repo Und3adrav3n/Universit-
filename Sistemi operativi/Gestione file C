@@ -1,0 +1,116 @@
+Tutti i metodi sono inclusi in stdio.h
+
+FILE* fopen(char *nomefile, char *modalità);
+	Apre uno stream di dati con input il file nomefile ed in modalità indicata
+
+	nomefile = array di char contenente il nome del file
+	modalità = array di char contenente la modalità di apertura
+		txt		bin
+		r(+)	rb(+)	lettura (e scrittura)
+		w(+)	wb(+)	scrittura (e lettura)
+		a(+)	ab(+)	scrittura (e lettura) a fine file
+	
+	restituisce un puntatore al file aperto
+
+int fclose(FILE *fp);
+	Chiude un stream di dati
+
+	fp = puntatore al file da chiudere
+
+int fgetc(FILE *fp);
+	Legge un carattere da uno stream di dati
+
+	fp = puntatore al file da cui leggere un carattere
+
+	restituisce il carattere letto
+
+int fputc(int c, FILE *fp);
+	
+	
+	c  = char da inserire
+	fp = puntatore al file in cui inserire c
+
+	restituisce EOF in caso di errore o c in caso di successo
+
+char* fgets(char *s, int n, FILE* fp);
+	s  = puntatore al vettore in cui vengono salvati i caratteri
+	n  = numero di caratteri da leggere
+	fp = puntatore al file da leggere
+
+	restituisce NULL in caso di errore ed s in caso di successo
+ 
+int fputs(char *s, FILE *fp);
+	s  = puntatore al vettore degli elementi che saranno inseriti
+	fp = puntatore al file dove inserire gli elementi
+
+	restituisce EOF in caso di errore e 0 in caso di successo
+
+int fprintf(FILE *fp, char *format, T var1, ...);
+	fp     = puntatore al file nel quale stampare le informazioni
+	format = formato di scrittura	
+	var1...= var del formato da scrivere all'interno del file
+
+	restituisce -1 in caso di errore ed il numero di caratteri scritti in caso di successo
+
+int fscanf(FILE *fp, char *format, T var1, ...);
+	fp     = puntatore al file da cui leggere le informazioni
+	format = formato di lettura
+	var1...= var del formato dove salvare le informazioni lette
+
+	restituisce EOF in caso di errore ed il numero di caratteri letti in caso di successo
+
+int fread(void *buffer, int size, int count, FILE *fp);
+	buffer = puntatore all'area di memoria dove archiviare i dati
+	size   = dimensione del dato da leggere in B
+	count  = numero di dati consecutivi da leggere
+	fp     = puntatore al file sorgente
+
+	restituisce il numero di oggetti letto
+
+int fwrite(void *buffer, int size, int count, FILE *fp);
+	buffer = puntatore all'area di memoria dove sono archiviati i dati
+	size   = dimensione del singolo dato in B
+	count  = numero di dati consecutivi da scrivere
+	fp     = puntatore al file di destinazione
+
+	restituisce il numero di elementi specificato da count, un numero diverso in caso di errore ed uguale in caso di successo
+
+int fseek(FILE *fp, long offset, int whence);
+	fp     = puntatore al file di lavoro
+	offset = numero di B di offset rispetto a whence
+	whence = punto su cui applicare l'offset
+		SEEK_SET = inizio del file
+		SEEK_CUR = posizione corrente all'interno del file
+		SEEK_END = fine del file
+	
+	restituisce un valore diverso da zero in caso di errore, 0 altrimenti
+
+int fsetpos(FILE *stream, const fpos_t *pos);
+	stream = puntatore al file che identifica lo stream
+	pos    = puntatore ad un oggetto posizione 
+
+	restituisce un numero diverso da zero ed imposta errno positivo in caso di errore, 0 altrimenti
+
+int fgetpos(FILE *stream, fpos_t *pos);
+	stream = puntatore al file che identifica lo stream
+	pos    = puntatore ad un oggetto fpos_t
+
+	restituisce un valore non-zero in caso di errore, 0 in caso di riuscita
+
+long int ftell(FILE *stream);
+	stream = puntatore al file che identifica lo stream
+	
+	restituisce il valore attuale del puntatore posizione, in caso di errore ridà -1L ed imposta il valore errno come positivo
+
+int feof(FILE *stream);
+	stream = puntatore al file che identifica lo stream	
+
+	restituisce true (un valore diverso da zero) se si ha raggiunto la fine del file, 0/false altrimenti
+
+int ferror(FILE *stream);
+	stream = puntatore al file che identifica lo stream
+
+	restituisce true o false in base alla presenza di errori durante la lavorazione del file
+
+void perror(const char *str);
+	str = stringa personalizzata da mostrare prima del messaggio di errore
