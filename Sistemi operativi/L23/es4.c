@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<signal.h>
+#include<unistd.h>
+#include<wait.h>
 
 #define N 10
 
@@ -8,12 +10,11 @@ void handler(int sig)
 {
 	if(sig == SIGUSR1)
 	{
-		printf("Attivazione!");
-		return;
+		printf("Attivazione!\n");
 	}
 	else
 	{
-		printf("Morto!");
+		printf("Morto!\n");
 		exit(0);
 	}
 }
@@ -43,11 +44,12 @@ int main(int argc, char* argv[])
 			signal(SIGUSR2, handler);
 			pause();
 			printf("%d: Sono stato attivato!\n", pid);
-			system(argv[i+1]);
+			system(argv[i]);
 			exit(0);
 		}
 		else
 		{
+			sleep(2);
 			if(pid_padre % 2 == 0)
 			{
 				if(pid % 2 == 0){
@@ -74,11 +76,11 @@ int main(int argc, char* argv[])
 				}
 			}
 			waitpid(pid, &status, 0);
-			printf("Status %d° Figlio: %d\n", i+1, status);
+			printf("Status %d° Figlio: %d\n", i, status);
 		}
 		i++;
 	} 
-	while((i < argc+1) && (pid_padre != getppid()));
+	while((i < argc) && (pid_padre != getppid()));
 
 	return 0;
 	
