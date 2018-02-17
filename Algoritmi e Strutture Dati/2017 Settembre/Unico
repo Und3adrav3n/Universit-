@@ -1,0 +1,93 @@
+--------------
+PSEUDOCODIFICA
+--------------
+
+CONNESSE‐DIVERSE(A)
+	for i=0 to A.length-1
+		color[i]=0
+
+	j=0
+	for i=0 to A.length-1
+		if(color[i]==0)
+			j=j+1
+			DFS-VISIT(A,i,color,j)
+
+	if(j == 0 || j == 1)
+		return true
+	
+	for i = 1 to j
+		n = CONTANODI(A,j,color)
+		nnodi[n]++
+		
+		if(nnodi[n] > 1)
+			return false
+			
+	return true
+
+DFS-VISIT(A,i,color,j)
+
+	color[i]=j
+	x=A[i]
+	while x!=null
+		v=x.key
+		if color[v]==0
+			DFS-VISIT(A,v,color,j)
+		x=x.next
+		
+CONTANODI(A,j,color)
+
+	cont=0
+	for i=0 to A.length-1
+		if color[i]==j
+			cont=cont+1
+	return cont
+	
+--2
+
+FUNZIONE(T)				/* T è un albero binario di interi */
+	L.head = NULL    	/* L è una nuova lista (vuota) di interi */ 
+	FUNZ-RIC(T.root,L,0) 
+	return L 
+
+FUNZ-RIC(v,L,depth) 
+	if(v==NULL) return 
+	if(depth > 1000) 
+		AGGIUNGI-IN-CODA(L,v.info) 
+	else 
+		AGGIUNGI-IN-TESTA(L,v.info)     
+	FUNZ-RIC(v.left,L,depth+1) 
+	FUNZ-RIC(v.right,L,depth+1) 
+
+Complessità pari a Teta(n^2)
+
+Nel caso peggiore rappresentato da un albero completo,
+abbiamo che AGGIUNGI-IN-TESTA ha complessità Teta(1), 
+e solo la visita pesa sulla complessità del programma,
+che corrisponde a Teta(n)
+
+
+----------------
+PROGRAMMAZIONE C
+----------------
+
+typedef struct elem {
+	int info;
+	struct elem *sx;
+	struct elem *dx;
+} nodo_albero;
+typedef nodo_albero *BTree;
+
+typedef struct elem2 {
+	int info;
+	struct elem2 *next;
+} nodo_lista;
+typedef nodo_lista *pList;
+
+int esiste(pList L, int x);
+int lunghezza(pList L);
+int altezza(BTree T);
+
+--1
+int esiste_somma(Btree T, pList L)
+{
+	
